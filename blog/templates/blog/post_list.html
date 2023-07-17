@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p class="main-title">블로그 게시판 첫 화면입니다.</p>
+
+    <!-- 글 작성 버튼 -->
+    <form action="{% url 'blog:write' %}" method="get">
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ request.GET.next }}">
+        <input type="submit" value="글 작성">
+    </form>
+
+    
+    <!-- 게시글 리스트 -->
+    {% if posts %}
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>카테고리</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성자</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.category }}</td>
+                <td><a href="{% url 'blog:detail' pk=post.pk %}" class="btn">{{ post.title }}</a></td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.writer }}</td>
+            </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>작성된 게시물이 없습니다.</p>
+        {% endif %}
+
+        <!-- 검색 폼 -->
+        <form action="{% url 'blog:search' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="search_word" placeholder="검색어를 입력하세요">
+            <button type="submit">검색</button>
+        </form>
+        {% endblock %}
