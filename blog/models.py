@@ -17,8 +17,8 @@ category_select = (
 class Post(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
-    writer = models.CharField(max_length=30)
+    writer = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=30, choices= category_select, default='자유')
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)
-
+    

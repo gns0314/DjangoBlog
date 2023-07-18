@@ -15,5 +15,5 @@ urlpatterns = [
     # 글 삭제
     path("delete/<int:pk>", views.Delete.as_view(), name='delete'),
     # 글 검색
-    path('search/<str:tag>', views.Search.as_view(), name='search'),
+    path('search/', views.Search.as_view(), name='search'),
 ]

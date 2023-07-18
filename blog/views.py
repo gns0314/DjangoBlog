@@ -9,11 +9,9 @@ from django.db.models import Q
 
 class Index(View):
     def get(self, request):
-        form = PostSearchForm()
         post_objs = Post.objects.all()
         context = {
-            "form": form,
-            "posts": post_objs,
+            'posts': post_objs,
         }
         return render(request, 'blog/post_list.html', context)
     
@@ -55,7 +53,7 @@ class DetailView(View):
 class Update(View):
     def get(self, request, pk): 
         post = Post.objects.get(pk=pk)
-        form = PostForm(initial={'title': post.title, 'content': post.content})
+        form = PostForm(initial={'title': post.title, 'content': post.content, 'category': post.category})
         context = {
             'form': form,
             'post': post
@@ -82,17 +80,19 @@ class Update(View):
 # 게시글 삭제
 class Delete(View):
     def post(self, request, pk): 
-        post = Post.objects.get(pk = pk)
+        post = Post.objects.get(pk=pk)
         post.delete()
         return redirect('blog:list')
     
 
 # 게시글 검색
 class Search(View):
-    def post(self, request, tag):
-        tag = request.POST.get('tag', '')
-        posts = Post.objects.filter(Q(title__icontains=tag) | Q(category__icontains=tag))
+    def post(self, request):
+        search_word = request.POST.get('search_word', '')
+        posts = Post.objects.filter(Q(title__icontains=search_word) | Q(category__icontains=search_word))
         context = {
             'posts': posts
         }
         return render(request, 'blog/post_search.html', context)
+    
+
