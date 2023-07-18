@@ -11,9 +11,36 @@
 </form>
 {% endif %}
 </form>
+<!-- 글 상세화면 -->
 <p>카테고리: {{ post.category }}</p>
 <p>내용: {{ post.content }}</p>
 <p>작성자: {{ post.writer }}</p>
 <p>작성일: {{ post.created_at }}</p>
 
+<h3>댓글</h3>
+<form action="{% url 'blog:cm-write' pk=post.pk %}" method="post">
+    {% csrf_token %}
+    {{ comment_form.content }}
+    <input type="submit" value="댓글 작성">
+</form>
+<br>
+
+<!-- comments -->
+<!-- if 문 -->
+{% if comments %}
+    <ul>
+    {% for comment in comments %}
+    <li>{{ comment.content }} /{{comment.created_at}}
+        {% if post_writer == request.user %}
+        <form action="{% url 'blog:cm-delete' pk=comment.pk %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="X" class="btn">
+        </form>
+        {% endif %}
+    </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>댓글이 없습니다.</p>
+{% endif %}
 {% endblock %}

@@ -3,8 +3,8 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
-from .models import Post
-from .forms import PostForm, PostSearchForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 # Create your views here.
 
 
@@ -46,8 +46,12 @@ class DetailView(View):
             post = Post.objects.get(pk=pk)
         except ObjectDoesNotExist as e:
             return render(request, 'blog/deleted_post.html')
+        comments = Comment.objects.filter(post=post)
+        comment_form = CommentForm()
         context = {
-            'post': post
+            'post': post,
+            'comments': comments,
+            'comment_form': comment_form,
         }
 
         return render(request, 'blog/post_detail.html', context)
@@ -101,3 +105,28 @@ class Search(View):
     
 
 
+class CommentWrite(View):
+    def post(self, request, pk):
+        form = CommentForm(request.POST)
+        post = Post.objects.get(pk=pk)
+        if form.is_valid():
+            content = form.cleaned_data['content']
+            writer = request.user
+            comment = Comment.objects.create(post=post, content=content, writer=writer)
+            return redirect('blog:detail', pk=pk)
+
+        context = {
+            'post': post,
+            'comments': post.comment_set.all(),
+            'comment_form': form
+        }
+        return render(request, 'blog/post_detail.html', context)
+    
+
+class CommentDelete(View):
+    def post(self, request, pk):
+        comment = Comment.objects.get(pk=pk)
+        post_id = comment.post.id
+        comment.delete()
+
+        return redirect('blog:detail', pk = post_id)
