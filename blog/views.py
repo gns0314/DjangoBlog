@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import PostForm, PostSearchForm
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
+from .models import Post
+from .forms import PostForm, PostSearchForm
 # Create your views here.
 
 
@@ -41,7 +42,10 @@ class Write(LoginRequiredMixin, View):
 # 게시글 상세보기
 class DetailView(View):
     def get(self, request, pk): 
-        post = Post.objects.get(pk = pk)
+        try:
+            post = Post.objects.get(pk=pk)
+        except ObjectDoesNotExist as e:
+            return render(request, 'blog/deleted_post.html')
         context = {
             'post': post
         }
@@ -95,4 +99,5 @@ class Search(View):
         }
         return render(request, 'blog/post_search.html', context)
     
+
 
