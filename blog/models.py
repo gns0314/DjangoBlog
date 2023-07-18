@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
+
 User = get_user_model()
 
 # Create your models here.
@@ -22,7 +23,12 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
+    hit = models.PositiveBigIntegerField(default=0)
 
+    @property
+    def update_counter(self):
+        self.hit = self. hit + 1
+        self.save()
 
 # 댓글
 class Comment(models.Model):
@@ -30,6 +36,7 @@ class Comment(models.Model):
     content = models.TextField()
     writer = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.content

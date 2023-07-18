@@ -42,10 +42,7 @@ class Write(LoginRequiredMixin, View):
 # 게시글 상세보기
 class DetailView(View):
     def get(self, request, pk): 
-        try:
-            post = Post.objects.get(pk=pk)
-        except ObjectDoesNotExist as e:
-            return render(request, 'blog/deleted_post.html')
+        post = Post.objects.get(pk=pk)
         comments = Comment.objects.filter(post=post)
         comment_form = CommentForm()
         context = {
@@ -53,6 +50,7 @@ class DetailView(View):
             'comments': comments,
             'comment_form': comment_form,
         }
+        post.update_counter
 
         return render(request, 'blog/post_detail.html', context)
     

@@ -10,6 +10,7 @@
                 <th>제목</th>
                 <th>내용</th>
                 <th>작성자</th>
+                <th>조회수</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td><a href="{% url 'blog:detail' pk=post.pk %}" class="btn">{{ post.title }}</a></td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.writer }}</td>
+                <td>{{ post.hit }}</td>
             </tr>
                 {% endfor %}
             </tbody>
