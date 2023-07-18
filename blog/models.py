@@ -21,4 +21,4 @@ class Post(models.Model):
     category = models.CharField(max_length=30, choices= category_select, default='자유')
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)
-    
+    is_deleted = models.BooleanField(default=False)

@@ -3,10 +3,13 @@
 {% block content %}
 <hr>
 <h2>제목: {{ post.title }}</h2>
-<a href="{% url 'blog:edit' pk=post.pk %}" class="btn">수정</a>
-<form action="{% url 'blog:delete' pk=post.pk %}" method="post">
+{% if post_writer == request.user %}
+<a href="{% url 'blog:edit' pk=post_id %}" class="btn">수정</a>
+<form action="{% url 'blog:delete' pk=post_id %}" method="post">
     {% csrf_token %}
     <input type="submit" value="삭제" class="btn">
+</form>
+{% endif %}
 </form>
 <p>카테고리: {{ post.category }}</p>
 <p>내용: {{ post.content }}</p>

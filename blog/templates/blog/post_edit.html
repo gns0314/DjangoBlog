@@ -6,7 +6,7 @@
     {{ form.category.label_tag }}
     <select name="{{ form.category.name }}">
         {% for choice in form.category.field.choices %}
-            <option value="{{ choice.0 }}" {% if choice.0 = form.initial.category %}selected{% endif %}>{{ choice.1 }}</option>
+            <option value="{{ choice.0 }}" {% if choice.0 == form.initial.category %}selected{% endif %}>{{ choice.1 }}</option>
         {% endfor %}
     </select>
     <br>
