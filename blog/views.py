@@ -93,11 +93,12 @@ class Delete(View):
 
 # 게시글 검색
 class Search(View):
-    def post(self, request, search_word):
-        search_word = request.POST.get('search_word')
-        posts = Post.objects.filter(Q(title__icontains=search_word) | Q(category__icontains=search_word))
+    def get(self, request):
+        search_word = request.GET.get('search_word')
+        posts = Post.objects.filter(Q(title__icontains=search_word) | Q(category__icontains=search_word)).order_by('-created_at')
         context = {
-            'posts': posts
+            'posts': posts,
+            'search_word': search_word
         }
         return render(request, 'blog/post_search.html', context)
     
