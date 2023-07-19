@@ -11,8 +11,10 @@ from .forms import PostForm, CommentForm
 class Index(View):
     def get(self, request):
         post_objs = Post.objects.all()
+        cnt = Post.objects.count()
         context = {
             'posts': post_objs,
+            'cnt': cnt
         }
         return render(request, 'blog/post_list.html', context)
     
