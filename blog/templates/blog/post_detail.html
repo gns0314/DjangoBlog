@@ -6,16 +6,20 @@
 
     <h2 class="main-title">글 조회</h2>
 
-    <h2>제목: {{ post.title }}</h2>
-    
-    <!-- 글 상세화면 -->
-    <div class="view-info">
-        <p>카테고리: {{ post.category }}</p>
-        <p>작성자: {{ post.writer }}</p>
-        <p>작성일: {{ post.created_at }}</p>
-        <p>조회수: {{ post.hit }}</p>
-    </div>
-    <p>내용: {{ post.content }}</p>
+   <div class="view">
+        <div class="view-header">
+            <h2>제목: {{ post.title }}</h2>
+            
+            <!-- 글 상세화면 -->
+            <div class="view-info">
+                <p>카테고리: {{ post.category }}</p>
+                <p>작성자: {{ post.writer }}</p>
+                <p>작성일: {{ post.created_at }}</p>
+                <p>조회수: {{ post.hit }}</p>
+            </div>
+        </div>
+        <div class="view-content">{{ post.content }}</div>
+   </div>
     
     <div class="btn-group">
         <a href="{% url 'blog:list' %}" class="btn">목록</a>
@@ -23,36 +27,47 @@
             <a href="{% url 'blog:edit' pk=post.pk %}" class="btn">수정</a>
             <form action="{% url 'blog:delete' pk=post.pk %}" method="post">
                 {% csrf_token %}
-                <input type="submit" value="삭제" class="btn">
+                <button type="submit" class="btn">삭제</button>
             </form>
             {% endif %}
-        
     </div>
 </div>
-<h3>댓글</h3>
-<form action="{% url 'blog:cm-write' pk=post.pk %}" method="post">
-    {% csrf_token %}
-    {{ comment_form.content }}
-    <input type="submit" value="댓글 작성">
-</form>
-<br>
 
-<!-- comments -->
-<!-- if 문 -->
-{% if comments %}
-    <ul>
-    {% for comment in comments %}
-    <li>{{ comment.content }} /{{comment.created_at}}
-        {% if comment.writer == request.user %}
-        <form action="{% url 'blog:cm-delete' pk=comment.pk %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="X" class="btn">
-        </form>
-        {% endif %}
-    </li>
-    {% endfor %}
+<!-- 댓글 -->
+<div class="main">
+
+    <h2 class="main-title">댓글</h2>
+    {% if comments %}
+    <ul class="cm-ul">
+        {% for comment in comments %}
+        <li>
+            <div class="cm-header">
+                <div class="view-info">
+                    <p>{{ comment.writer }}({{ comment.created_at|date:'Y-m-d H:m'}})</p>
+                    {% if comment.writer == request.user %}
+                    <form action="{% url 'blog:cm-delete' pk=comment.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">삭제</button>
+                    </form>
+                    {% endif %}
+                </div>
+                <h3>{{ comment.content }} </h3>
+            </div>
+        </li>
+        {% endfor %}
     </ul>
-{% else %}
+    {% else %}
     <p>댓글이 없습니다.</p>
-{% endif %}
+    {% endif %}
+    
+    <!-- 댓글 작성 -->
+    <form action="{% url 'blog:cm-write' pk=post.pk %}" method="post">
+        {% csrf_token %}
+        {{ comment_form.content }}
+        <div class="btn-group">
+                <button type="submit" class="btn">작성</button>
+            </div>
+            </form>
+</div>
+
 {% endblock %}

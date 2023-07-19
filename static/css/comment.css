@@ -1,0 +1,26 @@
+.cm-ul{
+    list-style:none;
+    margin-top: 30px;
+}
+
+.cm-ul li{
+    display: flex;
+    margin-bottom: 15px;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid lightgray
+}
+
+.cm-header{
+    background: #fff;
+    padding: 20px 30px;
+}
+
+.cm-write{
+    width: 100%;
+    height: 6.25em;
+    border: 1px solid lightgray;
+    resize: none;
+    border-radius: 10px;
+}

@@ -104,6 +104,9 @@ body {
 
 /* 버튼 */
 .btn-group {
+	display: flex;
+    gap: 10px;
+    flex-direction: row-reverse;
 	margin-top: 20px;
 	text-align: right;
 }
