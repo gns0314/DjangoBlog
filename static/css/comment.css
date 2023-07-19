@@ -24,3 +24,9 @@
     resize: none;
     border-radius: 10px;
 }
+
+.cm-delete{
+    background-color: #fff;
+    border: none;
+    color: red;
+}

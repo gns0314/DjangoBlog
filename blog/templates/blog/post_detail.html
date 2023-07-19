@@ -47,7 +47,7 @@
                     {% if comment.writer == request.user %}
                     <form action="{% url 'blog:cm-delete' pk=comment.pk %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn">삭제</button>
+                        <button type="submit" class="cm-delete">X</button>
                     </form>
                     {% endif %}
                 </div>
