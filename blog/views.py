@@ -93,8 +93,8 @@ class Delete(View):
 
 # 게시글 검색
 class Search(View):
-    def post(self, request):
-        search_word = request.POST.get('search_word', '')
+    def post(self, request, search_word):
+        search_word = request.POST.get('search_word')
         posts = Post.objects.filter(Q(title__icontains=search_word) | Q(category__icontains=search_word))
         context = {
             'posts': posts
@@ -102,7 +102,7 @@ class Search(View):
         return render(request, 'blog/post_search.html', context)
     
 
-
+# 댓글 작성
 class CommentWrite(View):
     def post(self, request, pk):
         form = CommentForm(request.POST)
@@ -121,6 +121,7 @@ class CommentWrite(View):
         return render(request, 'blog/post_detail.html', context)
     
 
+# 댓글 삭제
 class CommentDelete(View):
     def post(self, request, pk):
         comment = Comment.objects.get(pk=pk)
