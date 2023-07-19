@@ -23,4 +23,4 @@ class CommentForm(forms.ModelForm):
 
 # 검색 폼
 class PostSearchForm(forms.Form):
-    search_word = forms.CharField(label='Search Word')
+    search_word = forms.CharField(label='search_Word')

@@ -15,9 +15,10 @@
         <a href="{% url 'user:logout' %}" class="btn">Logout</a>
         {% else %}
         <p>Please, Login</p>
+        <a href="{% url 'user:login' %}" class="btn">로그인</a>
         {% endif %}
         <br><br>
-        <h1>Blog</h1>
+        <a href="{% url 'blog:list' %}" class="btn"><h1>Blog</h1></a>
         {% block content %}
         {% endblock %}
     </div>
