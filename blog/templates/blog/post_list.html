@@ -12,9 +12,20 @@
         <!-- 검색 폼 -->
         <div>
             <form action="{% url 'blog:search' %}" method="GET" class="search-form">
+                <label for="category" class="a11y-hidden">카테고리</label>
+                <select name="category" id="category">
+                    <option value="자유">자유</option>
+                    <option value="취미">취미</option>
+                    <option value="정보">정보</option>
+                </select>
                 <label for="search" class="a11y-hidden">검색</label>
-                <input id="search" type="text" name="search_word" placeholder="검색어를 입력하세요" required>
+                <input id="search" type="text" name="search_word" placeholder="검색어를 입력하세요">
                 <button type="submit"><img src="{% static 'img/icon-search.png' %}" alt="검색"></button>
+                <label for="sort" class="a11y-hidden">정렬</label>
+                <select name="sort" id="sort">
+                    <option value="latest" {% if sort_by == 'latest' %}selected{% endif %}>최신순</option>
+                    <option value="hits" {% if sort_by == 'hits' %}selected{% endif %}>조회순</option>
+                </select>
             </form>
         </div>
     </div>

@@ -10,7 +10,7 @@ from .forms import PostForm, CommentForm
 
 class Index(View):
     def get(self, request):
-        post_objs = Post.objects.all()
+        post_objs = Post.objects.all().order_by('-created_at')
         cnt = Post.objects.count()
         context = {
             'posts': post_objs,
@@ -96,14 +96,29 @@ class Delete(View):
         return redirect('blog:list')
     
 
-# 게시글 검색
 class Search(View):
     def get(self, request):
         search_word = request.GET.get('search_word')
-        posts = Post.objects.filter(Q(title__icontains=search_word) | Q(category__icontains=search_word)).order_by('-created_at')
+        category = request.GET.get('category') 
+        posts = Post.objects.all().order_by('created_at')
+        sort = request.GET.get('sort', 'latest')
+
+        if search_word:
+            posts = posts.filter(Q(title__icontains=search_word) | Q(category__icontains=search_word))
+
+        if category:
+            posts = posts.filter(category=category)
+
+        if sort == 'hits':
+            posts = posts.order_by('-hit')  
+        else:
+            posts = posts.order_by('-created_at')  
+
         context = {
             'posts': posts,
-            'search_word': search_word
+            'search_word': search_word,
+            'category': category,
+            'sort': sort  
         }
         return render(request, 'blog/post_search.html', context)
     
