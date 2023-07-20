@@ -12,10 +12,10 @@
             
             <!-- 글 상세화면 -->
             <div class="view-info">
-                <p>카테고리: {{ post.category }}</p>
-                <p>작성자: {{ post.writer }}</p>
-                <p>작성일: {{ post.created_at }}</p>
-                <p>조회수: {{ post.hit }}</p>
+                <p>카테고리: {{ post.category }} |</p>
+                <p>작성자: {{ post.writer }} |</p>
+                <p>작성일: {{ post.created_at|date:'Y-m-d H:m' }} |</p>
+                <p>조회수: {{ post.hit }} </p>
             </div>
         </div>
         <div class="view-content">{{ post.content }}</div>

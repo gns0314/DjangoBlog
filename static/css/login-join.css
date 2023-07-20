@@ -58,3 +58,7 @@
 [type="checkbox"]:checked + label {
 	font-weight: bold;
 }
+
+.ul-description{
+	list-style: none;
+}

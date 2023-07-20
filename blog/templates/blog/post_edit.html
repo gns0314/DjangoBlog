@@ -1,21 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.category.label_tag }}
-    <select name="{{ form.category.name }}">
-        {% for choice in form.category.field.choices %}
-            <option value="{{ choice.0 }}" {% if choice.0 == form.initial.category %}selected{% endif %}>{{ choice.1 }}</option>
-        {% endfor %}
-    </select>
-    <br>
-    {{ form.title.label_tag }}
-    <input type="text" name="{{ form.title.name }}" value="{{ form.initial.title }}">
-    <br>
-    {{ form.content.label_tag }}
-    <textarea name="{{ form.content.name}}">{{ form.initial.content }}</textarea>
-    <br>
-    <input type="submit" value="수정 완료">
-</form>
+<div class="main">
+    <h2 class="main-title">글수정</h2>
+    <table class="table write">
+        <form method="post">
+            {% csrf_token %}
+            <tr>
+                <th><label for="category">카테고리</label></th>
+                <td>
+                    <select id="category" name="{{ form.category.name }}">
+                        {% for choice in form.category.field.choices %}
+                            <option value="{{ choice.0 }}" {% if choice.0 == form.initial.category %}selected{% endif %}>{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="board-title">제목</label></th>
+                <td><input type="text" id="board-title" name="{{ form.title.name }}" value="{{ form.initial.title }}"></td>
+            </tr>
+            <tr>
+                <th><label for="board-content">내용</label></th>
+                <td><textarea name="{{ form.content.name}}" id="board-content">{{ form.initial.content }}</textarea></td>
+            </tr>
+    </table>
+        <div class="btn-group">
+            <button type="submit" class="btn">수정</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

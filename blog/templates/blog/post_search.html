@@ -2,30 +2,39 @@
 
 {% block content %}
   {% if posts %}
-    <h2>검색 결과</h2>
-    <table class="table table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>카테고리</th>
-                <th>제목</th>
-                <th>내용</th>
-                <th>작성자</th>
-                <th>조회수</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in posts %}
-            <tr>
-                <td>{{ post.category }}</td>
-                <td><a href="{% url 'blog:detail' pk=post.pk %}" class="btn">{{ post.title }}</a></td>
-                <td>{{ post.content }}</td>
-                <td>{{ post.writer }}</td>
-                <td>{{ post.hit }}</td>
-            </tr>
+    <div class="main">
+        <h2 class="main-title">검색 결과</h2>
+        <table class="table list">
+            <colgroup>
+                <col style="width: 100px" />
+                <col />
+                <col style="width: 150px" />
+                <col style="width: 120px" />
+                <col style="width: 100px" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ post.category }}</td>
+                    <td><a href="{% url 'blog:detail' pk=post.pk %}" >{{ post.title }}</a></td>
+                    <td>{{ post.writer }}</td>
+                    <td>{{ post.created_at|date:"Y-m-d" }}</td>
+                    <td>{{ post.hit }}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
-  {% else %}
-    <p>검색 결과가 없습니다.</p>
-  {% endif %}
+      {% else %}
+        <p>검색 결과가 없습니다.</p>
+      {% endif %}
+    </div>
 {% endblock %}

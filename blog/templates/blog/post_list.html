@@ -57,7 +57,7 @@
     <div class="btn-group">
         <form action="{% url 'blog:write' %}" method="get">
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ request.GET.next }}">
-            <input type="submit" value="글 작성" class="btn">
+            <button type="submit" class="btn">글 작성</button>
         </form>
     </div>
 </div>

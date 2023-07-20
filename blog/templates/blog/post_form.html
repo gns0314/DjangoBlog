@@ -1,10 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <h2>블로그 글 작성 화면</h2>
-    <!-- 제목 -->
-    <!-- 내용 -->
-    <form action="{% url 'blog:write' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" class="btn btn-outline-success">
-    </form>
+    <div class="main">
+        <h2 class="main-title">글쓰기</h2>
+        <p class="main-desc">내용을 입력 해주세요.</p>
+        <form action="{% url 'blog:write' %}" method="post">
+            {% csrf_token %}
+            <form>
+                <table class="table write">
+                  <colgroup>
+                    <col style="width: 120px">
+                    <col>
+                  </colgroup>
+                  <tbody>
+                    <tr>
+                      <th><label for="category">카테고리</label></th>
+                      <td>
+                        {{ form.category }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th><label for="board-title">제목</label></th>
+                      <td>{{ form.title }}</td>
+                    </tr>
+                    <tr>
+                      <th><label for="board-content">내용</label></th>
+                      <td>
+                        {{ form.content }}
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn-group">
+                <button type="submit" class="btn">작성</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}

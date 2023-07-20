@@ -13,7 +13,6 @@ class Registration(View):
         form = RegisterForm()
         context = {
             'form': form,
-            'title': 'User'
         }
         return render(request, 'user/user_register.html', context)
 
@@ -33,7 +32,6 @@ class Login(View):
         form = LoginForm()
         context = {
             'form': form,
-            'title': 'User'
         }
         return render(request, 'user/user_login.html', context)
         

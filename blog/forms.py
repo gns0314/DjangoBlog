@@ -8,6 +8,21 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['category','title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'write-title',
+                'id': 'board-title'
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'write-content',
+                'id': 'board-content'
+            }) ,
+            'category': forms.Select(attrs={
+                'class': 'write-category',
+                'id': 'category'
+            })
+        }
+        
 
 
 # 댓글 폼
