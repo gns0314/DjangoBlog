@@ -19,7 +19,7 @@
 
 
 ## 데이터베이스 모델링
-![ERD](/readme/ERD.png)
+![ERD](https://github.com/gns0314/DjangoBlog/assets/34575297/42c35f16-c60e-43d5-8c01-dfdad1a0e814)
 
 ## 프로젝트 구조
 ```
