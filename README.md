@@ -94,11 +94,29 @@
 | 회원가입 | /user/register |
 
 ## 화면
+- 메인페이지
 ![메인페이지](https://github.com/gns0314/DjangoBlog/assets/34575297/4e2663ad-79cb-44d6-8116-20beb09ed68e)
-![게시판,게시글](https://github.com/gns0314/DjangoBlog/assets/34575297/5d57dc1c-5192-4a06-a809-92b22db0fadf)
-![로그인,회원가입](https://github.com/gns0314/DjangoBlog/assets/34575297/bbd0c6c6-0ef5-41d9-bb9a-b3665a45338a)
+
+- 게시판
+![게시판](https://github.com/gns0314/DjangoBlog/assets/34575297/7f639247-9243-4901-9a98-c11745e1a1eb)
+
+- 게시글
+![게시글](https://github.com/gns0314/DjangoBlog/assets/34575297/6af1fdd7-566c-4cee-85ab-06074c2c4596)
+
+- 로그인
+![로그인](https://github.com/gns0314/DjangoBlog/assets/34575297/b2ffc69e-015d-4c50-b3c5-5840500e1071)
+
+- 회원가입
+![회원가입](https://github.com/gns0314/DjangoBlog/assets/34575297/072196cd-c797-4a21-89d5-103b7607b95b)
+
+- 게시글 검색
 ![게시글 검색](https://github.com/gns0314/DjangoBlog/assets/34575297/af3e436e-2352-46fe-9f84-a346d6432608)
-![댓글, 잘못된 접근](https://github.com/gns0314/DjangoBlog/assets/34575297/e7bf1653-5eb5-4de4-8b7e-2c5c97197649)
+
+- 댓글
+![댓글](https://github.com/gns0314/DjangoBlog/assets/34575297/7e06f955-88a4-4798-b7a7-72b4b7d11596)
+
+- 잘못된 접근
+![잘못된 접근](https://github.com/gns0314/DjangoBlog/assets/34575297/5341c84e-7603-4a58-8dbb-31ca094fb83e)
 
 ## 느낀 점
 게시글 검색기능을 구현하면서 막막했던 부분을 멘토님에게 물어보다 검색기능은 POST보다 GET 방식을 권장하게 된다는 것을 멘토님에게 들어 알게 되었습니다.  
