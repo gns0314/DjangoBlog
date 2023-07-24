@@ -20,7 +20,9 @@
         </div>
         <div class="view-content">
             {{ post.content }}
-            <img src="{{ post.file_upload.url }}">
+            {% if post.file_upload %}
+            <img src="{{ post.file_upload.url }}" width="900px">
+            {% endif %}
         </div>
    </div>
     
