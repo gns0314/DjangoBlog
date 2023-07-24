@@ -29,7 +29,7 @@ class Write(LoginRequiredMixin, View):
         return render(request, 'blog/post_form.html', context)
 
     def post(self, request):
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.writer = request.user
@@ -73,7 +73,7 @@ class Update(View):
 
     def post(self, request, pk):
         post = Post.objects.get(pk = pk)
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES ,instance=post)
         if form.is_valid():
             post.category = form.cleaned_data['category']
             post.title = form.cleaned_data['title']
@@ -96,6 +96,7 @@ class Delete(View):
         return redirect('blog:list')
     
 
+# 게시글 검색
 class Search(View):
     def get(self, request):
         search_word = request.GET.get('search_word')

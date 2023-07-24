@@ -24,12 +24,22 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
     hit = models.PositiveBigIntegerField(default=0)
+    head_image = models.ImageField(
+        upload_to='blog/images/%Y/%m/%d/', blank=True)
+    file_upload = models.FileField(
+        upload_to='blog/files/%Y/%m/%d/', blank=True)
 
     @property
     def update_counter(self):
         self.hit = self. hit + 1
         self.save()
 
+    def get_file_name(self):
+        return self.file_upload.name.split('/')[-1]
+
+    def get_file_ext(self):
+        return self.get_file_name().split('.')[-1]
+    
 # 댓글
 class Comment(models.Model):
     post = models.ForeignKey('Post', on_delete=models.CASCADE)

@@ -7,7 +7,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['category','title', 'content']
+        fields = ['category','title', 'content', 'file_upload', 'head_image']
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'write-title',
@@ -20,7 +20,11 @@ class PostForm(forms.ModelForm):
             'category': forms.Select(attrs={
                 'class': 'write-category',
                 'id': 'category'
-            })
+            }),
+            'file_upload': forms.FileInput(attrs={
+                'class': 'file_upload'
+             }
+            )
         }
         
 
