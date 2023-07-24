@@ -102,8 +102,7 @@
 ![게시판](https://github.com/gns0314/DjangoBlog/assets/34575297/7f639247-9243-4901-9a98-c11745e1a1eb)
 
 - 게시글
- ![게시글 구현](https://github.com/gns0314/DjangoBlog/assets/34575297/a78a8285-bef6-4fa9-820f-9c1527d02d65)
-
+![게시글](https://github.com/gns0314/DjangoBlog/assets/34575297/a78a8285-bef6-4fa9-820f-9c1527d02d65)
 
 - 로그인
 ![로그인](https://github.com/gns0314/DjangoBlog/assets/34575297/b2ffc69e-015d-4c50-b3c5-5840500e1071)
