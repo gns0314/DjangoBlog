@@ -8,7 +8,7 @@
 
    <div class="view">
         <div class="view-header">
-            <h2>제목: {{ post.title }}</h2>
+            <h2>{{ post.title }}</h2>
             
             <!-- 글 상세화면 -->
             <div class="view-info">
@@ -18,7 +18,10 @@
                 <p>조회수: {{ post.hit }} </p>
             </div>
         </div>
-        <div class="view-content">{{ post.content }}</div>
+        <div class="view-content">
+            {{ post.content }}
+            <img src="{{ post.file_upload.url }}">
+        </div>
    </div>
     
     <div class="btn-group">

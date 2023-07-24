@@ -4,7 +4,7 @@
 <div class="main">
     <h2 class="main-title">글수정</h2>
     <table class="table write">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <tr>
                 <th><label for="category">카테고리</label></th>
@@ -23,6 +23,10 @@
             <tr>
                 <th><label for="board-content">내용</label></th>
                 <td><textarea name="{{ form.content.name}}" id="board-content">{{ form.initial.content }}</textarea></td>
+            </tr>
+            <tr>
+                <th><label for="board-content">사진</label></th>
+                <td><input type="file" id="file_upload" name="{{ form.file_upload.name }}" value="{{ form.initial.file_upload }}"></td>
             </tr>
     </table>
         <div class="btn-group">

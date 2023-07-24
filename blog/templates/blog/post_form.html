@@ -4,7 +4,7 @@
     <div class="main">
         <h2 class="main-title">글쓰기</h2>
         <p class="main-desc">내용을 입력 해주세요.</p>
-        <form action="{% url 'blog:write' %}" method="post">
+        <form action="{% url 'blog:write' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <form>
                 <table class="table write">
@@ -29,6 +29,13 @@
                         {{ form.content }}
                       </td>
                     </tr>
+                    <tr>
+                      <th><label for="board-content">사진</label></th>
+                      <td>
+                        {{ form.file_upload }}
+                      </td>
+                    </tr>
+                </tbody>
                 </tbody>
             </table>
             <div class="btn-group">
