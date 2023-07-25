@@ -21,6 +21,7 @@
         <div class="sub-header">
             {% if user.is_authenticated %}
             <p>Welcome, {{ user.email }}</p>
+            <a href="{% url 'user:changepw' %}">비밀번호 변경</a>
             <a href="{% url 'user:logout' %}">로그아웃</a>
             {% else %}
             <p>Please, Login</p>

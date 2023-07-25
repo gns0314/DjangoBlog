@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 # Create your views here.
 
@@ -63,3 +65,29 @@ class Logout(View):
     def get(self, request):
         logout(request)
         return redirect('blog:list')
+    
+
+# 비밀번호 변경
+class ChangePassword(View):
+    def get(self, request):
+        form = PasswordChangeForm(request.user)
+        context = {
+            'form': form,
+        }
+        return render(request, 'user/change_password.html', context)
+    
+    def post(self, request):
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, '비밀번호가 성공적으로 변경되었습니다.')
+            return redirect('user:logout', pk=request.user.pk)
+        else:
+            messages.error(request, '비밀번호 변경에 실패했습니다. 다시 시도해주세요.')
+        
+        context = {
+            'form': form
+        }
+        
+        return render(request, 'user/change_password.html', context)
