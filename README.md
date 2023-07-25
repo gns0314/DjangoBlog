@@ -92,7 +92,8 @@
 | 댓글 삭제 | /blog/comment/\<int:pk\>/delete/ |
 | 로그인 | /user/login/ |
 | 로그아웃 | /user/logout/ |
-| 회원가입 | /user/register |
+| 회원가입 | /user/register/ |
+| 비밀번호 변경 | /user/changepw/ |
 
 ## 화면
 - 메인페이지
@@ -109,6 +110,9 @@
 
 - 회원가입
 ![회원가입](https://github.com/gns0314/DjangoBlog/assets/34575297/072196cd-c797-4a21-89d5-103b7607b95b)
+
+- 비밀번호 변경
+![비밀번호변경](https://github.com/gns0314/DjangoBlog/assets/34575297/f76cb2c3-ded2-4701-bf7f-c59d387fefc5)
 
 - 게시글 검색
 ![게시글 검색](https://github.com/gns0314/DjangoBlog/assets/34575297/af3e436e-2352-46fe-9f84-a346d6432608)
